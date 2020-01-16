@@ -7,9 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.nio.file.Paths
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +26,9 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
-
+        //val outputString: String = "defaultOutputString"
         val tv1 =findViewById<TextView>(R.id.tv1)
+        val tv2 =findViewById<TextView>(R.id.tv2)
 
         val btn1 = findViewById<Button>(R.id.button)
         btn1?.setOnClickListener {
@@ -37,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         val btndatum = findViewById<Button>(R.id.btnDatum)
         btndatum?.setOnClickListener {
-            createDateEntry(tv1)
+            createDateEntry(tv1,tv2)
             }
 
 
@@ -45,22 +50,59 @@ class MainActivity : AppCompatActivity() {
     private fun createEntry(boolean: Boolean, tv1: TextView) {
 
         if (boolean) {
-            tv1.text="wahr"
+            //tv1.text="wahr"
+            val path = System.getProperty("user.dir")
+            tv1.text= createDateString() + ";wahr;" + path
+            Toast.makeText(this, "Hi there! This is a Toast.", Toast.LENGTH_SHORT).show()
         }
         if (!boolean) {
-            tv1.text="falsch"
+            //tv1.text="falsch"
+            val path = Paths.get("").toAbsolutePath().toString()
+            tv1.text= createDateString() + ";falsch;" + path
+            Toast.makeText(this, "Hi there! This is a Toast.", Toast.LENGTH_LONG).show()
         }
     }
-    private fun createDateEntry(tv1: TextView) {
+    private fun createDateEntry(tv1: TextView, tv2:TextView) {
 
         //val date =
         val current = LocalDateTime.now()
         //Date(2020, 01, 15, 20, 24, 22)
         //current.year.toString()
-
-
+        var output: String= createDateString()
+       /* output += current.year.toString()
+        output += current.monthValue.toString()
+        output += current.dayOfMonth.toString()
+        output += ";"
+        //output += current.toLocalTime().toString()
+        output += current.hour.toString()
+        output += current.minute.toString()
+        output += current.second.toString()
+        output += ";"*/
+        output += tv1.text.toString()
             tv1.text=current.year.toString()
+            tv2.text=output
 
+    }
+
+    private fun createDateString(): String {
+        val current = LocalDateTime.now()
+
+        return current.format(DateTimeFormatter.ofPattern("yyyy-MM-dd;HH:mm:ss"))
+
+
+        //Date(2020, 01, 15, 20, 24, 22)
+        //current.year.toString()
+        var output: String = ""
+        output += current.year.toString()
+        output += current.monthValue.toString()
+        output += current.dayOfMonth.toString()
+        output += ";"
+        //output += current.toLocalTime().toString()
+        //output += current.toLocalTime().format("hhmmss")
+        output += current.minute.toString()
+        output += current.second.toString()
+        output += ";"
+        //return output
     }
 
 
@@ -79,4 +121,22 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+}
+class entry {
+  //var id: String? = null
+  var datum: String? = null
+  var uhrzeit: String? = null
+  var wert: String? = null
+
+  constructor() {}
+  constructor(datum: String?, uhrzeit: String?, wert: String?) {
+    this.datum = datum
+    this.uhrzeit = uhrzeit
+    this.wert = wert
+  }
+
+  override fun toString(): String {
+    //return "Eintrag [id=" + id + ", name=" + name + ", address=" + address + ", age=" + age + "]"
+    return datum + ";" + uhrzeit + ";" + wert
+  }
 }
