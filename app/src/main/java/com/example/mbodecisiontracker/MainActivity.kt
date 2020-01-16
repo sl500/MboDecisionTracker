@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 import java.nio.file.Paths
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -33,11 +34,13 @@ class MainActivity : AppCompatActivity() {
         val btn1 = findViewById<Button>(R.id.button)
         btn1?.setOnClickListener {
             createEntry(true, tv1)
+            createEntryWithClass(true)
         }
 
         val btn2 = findViewById<Button>(R.id.button2)
         btn2?.setOnClickListener {
             createEntry(false, tv1)
+            createEntryWithClass(false)
         }
 
         val btndatum = findViewById<Button>(R.id.btnDatum)
@@ -47,6 +50,25 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun createEntryWithClass(wert: Boolean) {
+        val current = LocalDateTime.now()
+        val uhrzeit = current.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+        val datum = current.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        if (wert) {
+            var entryobject: entryClass = entryClass(datum,uhrzeit,"wahr")
+
+            // content to be appended to file
+            var content:String = " This is additional content added to the File."
+            // using extension function appendText
+            File("MbhDecisionTrackerTest1.csv").appendText(content)
+
+        }
+        if (!wert) {
+            var entryobject: entryClass = entryClass(datum,uhrzeit,"falsch")
+        }
+    }
+
     private fun createEntry(boolean: Boolean, tv1: TextView) {
 
         if (boolean) {
@@ -122,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-class entry {
+class entryClass {
   //var id: String? = null
   var datum: String? = null
   var uhrzeit: String? = null
