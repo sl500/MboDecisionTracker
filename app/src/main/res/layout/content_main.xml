@@ -19,22 +19,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnGood"
         android:layout_width="299dp"
         android:layout_height="198dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="65dp"
-        android:text="Button"
+        android:text="@string/default_btnGood"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnBad"
         android:layout_width="273dp"
         android:layout_height="187dp"
         android:layout_marginStart="60dp"
         android:layout_marginBottom="60dp"
-        android:text="Button"
+        android:text="@string/default_btnBad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -44,16 +44,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:text="Datum"
+        android:text="@string/default_btnDate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnGood" />
 
     <TextView
         android:id="@+id/tv2"
         android:layout_width="367dp"
         android:layout_height="63dp"
         android:text="@string/default_tv2"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btnBad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

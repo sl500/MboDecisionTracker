@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="default_tv1">tv1_ausgabe</string>
     <string name="default_tv2">tv2_ausgabe</string>
+    <string name="default_btnGood">Good</string>
+    <string name="default_btnBad">Bad</string>
+    <string name="default_btnDate">Date</string>
+
 </resources>
